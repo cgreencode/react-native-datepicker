@@ -141,12 +141,13 @@ describe('DatePicker:', () => {
     const onDateChange = sinon.spy();
     const wrapper = shallow(<DatePicker onDateChange={onDateChange}/>);
     const datePicker = wrapper.instance();
-    const date = new Date('2016-06-06');
-    wrapper.setState({date});
+    wrapper.setState({
+      date: new Date('2016-06-06')
+    });
 
     datePicker.datePicked();
 
-    expect(onDateChange.calledWith('2016-06-06', date)).to.equal(true);
+    expect(onDateChange.calledWith('2016-06-06')).to.equal(true);
   });
 
   it('onDatePicked', () => {
@@ -220,6 +221,21 @@ describe('DatePicker:', () => {
 
     datePicker.mode = 'tttt';
     expect(datePicker.onPressDate).to.throw(Error);
+  });
+  
+  it('getTitle - with defaultText', () => {
+    const defaultText = 'Please pick a date';
+    const wrapper = shallow(<DatePicker defaultText={defaultText} />);
+    const datePicker = wrapper.instance();
+
+    expect(datePicker.getTitle()).to.equal(defaultText);
+  });
+
+  it('getTitle - without defaultText', () => {
+    const wrapper = shallow(<DatePicker date="2016-06-04" />);
+    const datePicker = wrapper.instance();
+
+    expect(datePicker.getTitle()).to.equal(datePicker.getDateStr());
   });
 });
 
