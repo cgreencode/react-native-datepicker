@@ -256,9 +256,6 @@ class DatePicker extends Component {
               >
                 <Animated.View
                   style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
-                  onStartShouldSetResponder={e => true}
-                  onMoveShouldSetResponder={e => true}
-                  onResponderTerminationRequest={this.props.modalOnResponderTerminationRequest}
                 >
                   <DatePickerIOS
                     date={this.state.date}
@@ -266,6 +263,8 @@ class DatePicker extends Component {
                     minimumDate={this.props.minDate && this.getDate(this.props.minDate)}
                     maximumDate={this.props.maxDate && this.getDate(this.props.maxDate)}
                     onDateChange={(date) => this.setState({date: date})}
+                    minuteInterval={this.props.minuteInterval}
+                    timeZoneOffsetInMinutes={this.props.timeZoneOffsetInMinutes}
                     style={[Style.datePicker, customStyles.datePicker]}
                   />
                   <TouchableHighlight
@@ -312,8 +311,7 @@ DatePicker.defaultProps = {
   // whether or not show the icon
   showIcon: true,
   disabled: false,
-  placeholder: '',
-  modalOnResponderTerminationRequest: e => true
+  placeholder: ''
 };
 
 DatePicker.propTypes = {
@@ -330,8 +328,7 @@ DatePicker.propTypes = {
   showIcon: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
   onDateChange: React.PropTypes.func,
-  placeholder: React.PropTypes.string,
-  modalOnResponderTerminationRequest: React.PropTypes.func
+  placeholder: React.PropTypes.string
 };
 
 export default DatePicker;
