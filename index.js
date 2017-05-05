@@ -36,7 +36,6 @@ class DatePicker extends Component {
     this.onPressDate = this.onPressDate.bind(this);
     this.onPressCancel = this.onPressCancel.bind(this);
     this.onPressConfirm = this.onPressConfirm.bind(this);
-    this.onPressMask = this.onPressMask.bind(this);
     this.onDatePicked = this.onDatePicked.bind(this);
     this.onTimePicked = this.onTimePicked.bind(this);
     this.onDatetimePicked = this.onDatetimePicked.bind(this);
@@ -90,14 +89,6 @@ class DatePicker extends Component {
 
   onMoveShouldSetResponder(e) {
     return true;
-  }
-
-  onPressMask() {
-    if (typeof this.props.onPressMask === 'function') {
-      this.props.onPressMask();
-    } else {
-      this.onPressCancel();
-    }
   }
 
   onPressCancel() {
@@ -180,6 +171,8 @@ class DatePicker extends Component {
         date: new Date(year, month, day)
       });
       this.datePicked();
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -189,6 +182,8 @@ class DatePicker extends Component {
         date: Moment().hour(hour).minute(minute).toDate()
       });
       this.datePicked();
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -204,6 +199,8 @@ class DatePicker extends Component {
         is24Hour: is24Hour,
         mode: androidMode
       }).then(this.onDatetimeTimePicked.bind(this, year, month, day));
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -213,6 +210,8 @@ class DatePicker extends Component {
         date: new Date(year, month, day, hour, minute)
       });
       this.datePicked();
+    } else {
+      this.onPressCancel();
     }
   }
 
@@ -317,7 +316,7 @@ class DatePicker extends Component {
                 style={Style.datePickerMask}
                 activeOpacity={1}
                 underlayColor={'#00000077'}
-                onPress={this.onPressMask}
+                onPress={this.onPressCancel}
               >
                 <TouchableHighlight
                   underlayColor={'#fff'}
@@ -404,7 +403,6 @@ DatePicker.propTypes = {
   onDateChange: React.PropTypes.func,
   onOpenModal: React.PropTypes.func,
   onCloseModal: React.PropTypes.func,
-  onPressMask: React.PropTypes.func,
   placeholder: React.PropTypes.string,
   modalOnResponderTerminationRequest: React.PropTypes.func,
   is24Hour: React.PropTypes.bool
