@@ -257,29 +257,6 @@ class DatePicker extends Component {
       this.props.onOpenModal();
     }
   }
-  
-  _renderIcon() {
-    const {
-      showIcon,
-      iconSource,
-      iconComponent,
-      customStyles
-    } = this.props;
-
-    if (showIcon) {
-      if (!!iconComponent) {
-        return iconComponent;
-      }
-      return (
-        <Image
-          style={[Style.dateIcon, customStyles.dateIcon]}
-          source={iconSource}
-        />
-      );
-    }
-
-    return null;
-  }
 
   render() {
     const {
@@ -313,7 +290,10 @@ class DatePicker extends Component {
           <View style={dateInputStyle}>
             {this.getTitleElement()}
           </View>
-          {this._renderIcon()}
+          {showIcon && <Image
+            style={[Style.dateIcon, customStyles.dateIcon]}
+            source={iconSource}
+          />}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
             animationType="none"
@@ -409,7 +389,6 @@ DatePicker.propTypes = {
   confirmBtnText: React.PropTypes.string,
   cancelBtnText: React.PropTypes.string,
   iconSource: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.object]),
-  iconComponent: React.PropTypes.element,
   customStyles: React.PropTypes.object,
   showIcon: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
