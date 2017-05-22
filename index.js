@@ -9,8 +9,7 @@ import {
   TimePickerAndroid,
   DatePickerIOS,
   Platform,
-  Animated,
-  Keyboard,
+  Animated
 } from 'react-native';
 import Style from './style';
 import Moment from 'moment';
@@ -245,8 +244,6 @@ class DatePicker extends Component {
       return true;
     }
 
-    Keyboard.dismiss();
-
     // reset state
     this.setState({
       date: this.getDate()
@@ -343,9 +340,14 @@ class DatePicker extends Component {
         onPress={this.onPressDate}
       >
         <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
-          <View style={dateInputStyle}>
-            {this.getTitleElement()}
-          </View>
+          {
+            !this.props.hideText ?
+              <View style={dateInputStyle}>
+                {this.getTitleElement()}
+              </View>
+            :
+              <View/>
+          }
           {this._renderIcon()}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
