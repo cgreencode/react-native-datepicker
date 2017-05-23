@@ -333,10 +333,8 @@ class DatePicker extends Component {
       disabled && customStyles.disabled
     ];
 
-    const TouchableComponent = this.props.TouchableComponent ? this.props.TouchableComponent : TouchableHighlight;
-
     return (
-      <TouchableComponent
+      <TouchableHighlight
         style={[Style.dateTouch, style]}
         underlayColor={'transparent'}
         onPress={this.onPressDate}
@@ -356,13 +354,13 @@ class DatePicker extends Component {
             <View
               style={{flex: 1}}
             >
-              <TouchableComponent
+              <TouchableHighlight
                 style={Style.datePickerMask}
                 activeOpacity={1}
                 underlayColor={'#00000077'}
                 onPress={this.onPressMask}
               >
-                <TouchableComponent
+                <TouchableHighlight
                   underlayColor={'#fff'}
                   style={{flex: 1}}
                 >
@@ -381,7 +379,7 @@ class DatePicker extends Component {
                         style={[Style.datePicker, customStyles.datePicker]}
                       />
                     </View>
-                    <TouchableComponent
+                    <TouchableHighlight
                       underlayColor={'transparent'}
                       onPress={this.onPressCancel}
                       style={[Style.btnText, Style.btnCancel, customStyles.btnCancel]}
@@ -391,21 +389,21 @@ class DatePicker extends Component {
                       >
                         {cancelBtnText}
                       </Text>
-                    </TouchableComponent>
-                    <TouchableComponent
+                    </TouchableHighlight>
+                    <TouchableHighlight
                       underlayColor={'transparent'}
                       onPress={this.onPressConfirm}
                       style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
                     >
                       <Text style={[Style.btnTextText, customStyles.btnTextConfirm]}>{confirmBtnText}</Text>
-                    </TouchableComponent>
+                    </TouchableHighlight>
                   </Animated.View>
-                </TouchableComponent>
-              </TouchableComponent>
+                </TouchableHighlight>
+              </TouchableHighlight>
             </View>
           </Modal>}
         </View>
-      </TouchableComponent>
+      </TouchableHighlight>
     );
   }
 }
