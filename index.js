@@ -9,7 +9,8 @@ import {
   TimePickerAndroid,
   DatePickerIOS,
   Platform,
-  Animated
+  Animated,
+  Keyboard,
 } from 'react-native';
 import Style from './style';
 import Moment from 'moment';
@@ -244,6 +245,8 @@ class DatePicker extends Component {
       return true;
     }
 
+    Keyboard.dismiss();
+
     // reset state
     this.setState({
       date: this.getDate()
@@ -324,7 +327,10 @@ class DatePicker extends Component {
       minuteInterval,
       timeZoneOffsetInMinutes,
       cancelBtnText,
-      confirmBtnText
+      confirmBtnText,
+      testID,
+      cancelBtnTestID,
+      confirmBtnTestID
     } = this.props;
 
     const dateInputStyle = [
@@ -338,6 +344,7 @@ class DatePicker extends Component {
         style={[Style.dateTouch, style]}
         underlayColor={'transparent'}
         onPress={this.onPressDate}
+        testID={testID}
       >
         <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
           <View style={dateInputStyle}>
@@ -383,6 +390,7 @@ class DatePicker extends Component {
                       underlayColor={'transparent'}
                       onPress={this.onPressCancel}
                       style={[Style.btnText, Style.btnCancel, customStyles.btnCancel]}
+                      testID={cancelBtnTestID}
                     >
                       <Text
                         style={[Style.btnTextText, Style.btnTextCancel, customStyles.btnTextCancel]}
@@ -394,6 +402,7 @@ class DatePicker extends Component {
                       underlayColor={'transparent'}
                       onPress={this.onPressConfirm}
                       style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
+                      testID={confirmBtnTestID}
                     >
                       <Text style={[Style.btnTextText, customStyles.btnTextConfirm]}>{confirmBtnText}</Text>
                     </TouchableHighlight>
