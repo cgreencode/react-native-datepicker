@@ -82,6 +82,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
 | customStyles | - | `number` | The hook of customize datepicker style, same as the native style. `dateTouchBody`, `dateInput`...|
 | showIcon | true | `boolean` | Controller whether or not show the icon |
+| hideText | false | `boolean` | Controller whether or not show the `dateText` |
 | iconComponent | - | `element` | Set the custom icon |
 | disabled | false | `boolean` | Controller whether or not disable the picker |
 | is24Hour | - | `boolean` | Set the TimePicker is24Hour flag. The default value depend on `format`. Only work in Android |
@@ -91,6 +92,7 @@ You can check [index.js](https://github.com/xgfe/react-native-datepicker/blob/ma
 | onCloseModal | - | `function` | This is called when the DatePicker Modal close |
 | onPressMask | - | `function` | This is called when clicking the ios modal mask |
 | modalOnResponderTerminationRequest | - | `function` | Set the callback for React Native's [Gesture Responder System](https://facebook.github.io/react-native/docs/gesture-responder-system.html#responder-lifecycle)'s call to `onResponderTerminationRequest`. By default this will reject a termination request, but can be overidden in case the View under the Modal is implementing custom gesture responders, and you wish for those to be overidden in certain cases.  |
+| TouchableComponent | `TouchableHighlight` | `Component` | Replace the `TouchableHighlight` with a custom `Component`. For example : `TouchableOpacity` |
 
 ### Property `customStyles` available keys
 
