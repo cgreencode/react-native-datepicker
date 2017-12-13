@@ -172,12 +172,12 @@ class DatePicker extends Component {
   }
 
   getTitleElement() {
-    const {date, placeholder, customStyles, allowFontScaling} = this.props;
+    const {date, placeholder, customStyles} = this.props;
 
     if (!date && placeholder) {
-      return (<Text allowFontScaling={allowFontScaling} style={[Style.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
+      return (<Text style={[Style.placeholderText, customStyles.placeholderText]}>{placeholder}</Text>);
     }
-    return (<Text allowFontScaling={allowFontScaling} style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
+    return (<Text style={[Style.dateText, customStyles.dateText]}>{this.getDateStr()}</Text>);
   }
 
   onDateChange(date) {
@@ -334,8 +334,7 @@ class DatePicker extends Component {
       TouchableComponent,
       testID,
       cancelBtnTestID,
-      confirmBtnTestID,
-      allowFontScaling
+      confirmBtnTestID
     } = this.props;
 
     const dateInputStyle = [
@@ -392,7 +391,7 @@ class DatePicker extends Component {
                         maximumDate={maxDate && this.getDate(maxDate)}
                         onDateChange={this.onDateChange}
                         minuteInterval={minuteInterval}
-                        timeZoneOffsetInMinutes={timeZoneOffsetInMinutes}
+                        timeZoneOffsetInMinutes={timeZoneOffsetInMinutes ? timeZoneOffsetInMinutes : null}
                         style={[Style.datePicker, customStyles.datePicker]}
                       />
                     </View>
@@ -403,7 +402,6 @@ class DatePicker extends Component {
                       testID={cancelBtnTestID}
                     >
                       <Text
-                        allowFontScaling={allowFontScaling}
                         style={[Style.btnTextText, Style.btnTextCancel, customStyles.btnTextCancel]}
                       >
                         {cancelBtnText}
@@ -415,7 +413,7 @@ class DatePicker extends Component {
                       style={[Style.btnText, Style.btnConfirm, customStyles.btnConfirm]}
                       testID={confirmBtnTestID}
                     >
-                      <Text allowFontScaling={allowFontScaling} style={[Style.btnTextText, customStyles.btnTextConfirm]}>{confirmBtnText}</Text>
+                      <Text style={[Style.btnTextText, customStyles.btnTextConfirm]}>{confirmBtnText}</Text>
                     </TouchableComponent>
                   </Animated.View>
                 </TouchableComponent>
@@ -445,7 +443,6 @@ DatePicker.defaultProps = {
   // whether or not show the icon
   showIcon: true,
   disabled: false,
-  allowFontScaling: true,
   hideText: false,
   placeholder: '',
   TouchableComponent: TouchableHighlight,
@@ -468,7 +465,6 @@ DatePicker.propTypes = {
   customStyles: PropTypes.object,
   showIcon: PropTypes.bool,
   disabled: PropTypes.bool,
-  allowFontScaling: PropTypes.bool,
   onDateChange: PropTypes.func,
   onOpenModal: PropTypes.func,
   onCloseModal: PropTypes.func,
