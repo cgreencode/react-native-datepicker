@@ -158,15 +158,11 @@ class DatePicker extends Component {
   getDateStr(date = this.props.date) {
     const {mode, format = FORMATS[mode]} = this.props;
 
-    const dateInstance = date instanceof Date
-      ? date
-      : this.getDate(date);
-
-    if (typeof this.props.getDateStr === 'function') {
-      return this.props.getDateStr(dateInstance);
+    if (date instanceof Date) {
+      return Moment(date).format(format);
+    } else {
+      return Moment(this.getDate(date)).format(format);
     }
-
-    return Moment(dateInstance).format(format);
   }
 
   datePicked() {
@@ -281,7 +277,8 @@ class DatePicker extends Component {
         TimePickerAndroid.open({
           hour: timeMoment.hour(),
           minute: timeMoment.minutes(),
-          is24Hour: is24Hour
+          is24Hour: is24Hour,
+          mode: androidMode
         }).then(this.onTimePicked);
       } else if (mode === 'datetime') {
         // 选日期和时间
@@ -338,8 +335,7 @@ class DatePicker extends Component {
       TouchableComponent,
       testID,
       cancelBtnTestID,
-      confirmBtnTestID,
-      locale
+      confirmBtnTestID
     } = this.props;
 
     const dateInputStyle = [
@@ -398,7 +394,6 @@ class DatePicker extends Component {
                         minuteInterval={minuteInterval}
                         timeZoneOffsetInMinutes={timeZoneOffsetInMinutes}
                         style={[Style.datePicker, customStyles.datePicker]}
-                        locale={locale}
                       />
                     </View>
                     <TouchableComponent
@@ -477,9 +472,7 @@ DatePicker.propTypes = {
   onPressMask: PropTypes.func,
   placeholder: PropTypes.string,
   modalOnResponderTerminationRequest: PropTypes.func,
-  is24Hour: PropTypes.bool,
-  getDateStr: PropTypes.func,
-  locale: PropTypes.string,
+  is24Hour: PropTypes.bool
 };
 
 export default DatePicker;
