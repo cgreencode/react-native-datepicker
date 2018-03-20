@@ -277,8 +277,7 @@ class DatePicker extends Component {
         TimePickerAndroid.open({
           hour: timeMoment.hour(),
           minute: timeMoment.minutes(),
-          is24Hour: is24Hour,
-          mode: androidMode
+          is24Hour: is24Hour
         }).then(this.onTimePicked);
       } else if (mode === 'datetime') {
         // 选日期和时间
